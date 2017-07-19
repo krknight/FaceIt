@@ -29,6 +29,7 @@ class FaceViewController: UIViewController {
             ///////////////////////////////////////////////////////////////////////
             
             let handler = #selector(FaceView.changeScale(byReactingTo:))
+            
             // need the target and the recognizer (action)
             let pinchRecognizer = UIPinchGestureRecognizer(target: inYourFaceMuffin , action: handler)
             // the action is FaceView.changeScale handler
@@ -43,6 +44,7 @@ class FaceViewController: UIViewController {
             let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(increaseHappiness))
             swipeUpRecognizer.direction = .up
             inYourFaceMuffin.addGestureRecognizer(swipeUpRecognizer)
+            
             let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(decreaseHappiness))
             swipeDownRecognizer.direction = .down
             inYourFaceMuffin.addGestureRecognizer(swipeDownRecognizer)

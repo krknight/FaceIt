@@ -43,7 +43,9 @@ class FaceView: UIView {
     {
         switch pinchRecognizer.state {  // inherited from UIPinchRecognizer
         case .changed, .ended:
-            scale *= CGFloat(pinchRecognizer.state.rawValue)
+//            scale *= CGFloat(pinchRecognizer.state.rawValue)
+            scale *= pinchRecognizer.scale
+            print("scale =  + \(scale)")
             pinchRecognizer.scale = 1 // reset scale
         default:
             break;
