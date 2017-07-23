@@ -6,9 +6,9 @@
 //  Copyright © 2017 Living Green. All rights reserved.
 //
 
-//////////////
-// CONTROLLER
-//////////////
+/////////////////////
+// DETAIL CONTROLLER
+/////////////////////
 
 
 import UIKit
@@ -21,6 +21,12 @@ class FaceViewController: UIViewController {
         }
     }
     
+    /*
+     MVC activity
+     1. On gesture the Controller connects to the View via IBOutlet
+     2. The View changes the Model via expression: FacialExpression
+     3. updatUI() is called to sync the View with the new Model 
+    */
     @IBOutlet weak var inYourFaceMuffin: FaceView! {
         didSet {   // property observer
             ///////////////////////////////////////////////////////////////////////
