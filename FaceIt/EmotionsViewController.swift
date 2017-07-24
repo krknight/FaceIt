@@ -49,9 +49,21 @@ class EmotionsViewController: UIViewController {
              the as? is conditionally checking to see if destinationViewController can be cast to a FaceViewController
              if not... then prepare will do nothing and let that destinationViewController appear unprepared because we only know how to prepare a FaceViewController. Could set as? as a as! and let it crash
              */
-            
+            if let identifier = segue.identifier {  // check to make sure segue identifier has been set
+                // expression set here (model change)
+                if let expression = emotionalFaces[identifier] {
+                    // set the model (which will call didSet updateUi and update the View
+                    faceViewController.expression = expression
+                }
+            }
         }
     }
  
+    // private dictionary to match the segue name to an expression (key, value)
+    private let emotionalFaces: Dictionary<String, FacialExpression> = [
+        "sad": FacialExpression(eyes: .closed, mouth: .frown),
+        "happy": FacialExpression(eyes: .open, mouth: .smile),
+        "worried": FacialExpression(eyes: .open, mouth: .smirk)
+    ]
 
 }
