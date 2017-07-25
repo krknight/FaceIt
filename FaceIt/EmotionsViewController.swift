@@ -43,7 +43,12 @@ class EmotionsViewController: UIViewController {
          We use the As cast with Any.
          It needs to be a faceViewController or we don't know how to prepare it.
          */
-        let destinationViewController = segue.destination
+        var destinationViewController = segue.destination  // changed from let to var
+        if let navigationController = destinationViewController as? UINavigationController {
+            destinationViewController = navigationController.visibleViewController ?? destinationViewController
+            // ?? set a default value to destinationViewController because navigationController is of type
+            // UIViewController? (optional)
+        }
         if let faceViewController = destinationViewController as? FaceViewController {
             /* 
              the as? is conditionally checking to see if destinationViewController can be cast to a FaceViewController
@@ -54,6 +59,17 @@ class EmotionsViewController: UIViewController {
                 if let expression = emotionalFaces[identifier] {
                     // set the model (which will call didSet updateUi and update the View
                     faceViewController.expression = expression
+                    /* 
+                     Display the emotion title sad, happy, worried
+                     Use the prepare function param sender: Any?
+                     Any doesnt understand any messages because it does not know what it is
+                     Take this Any and turn it into a UIButton, to do that
+                     (sender as? UIButton)
+                     but (sender as? UIButton) type is optional
+                     Either ! of ? to optional chain it
+                     optional chaining is safer incase sender is not a UIButton and as? returns nil
+                    */
+                    faceViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
                 }
             }
         }
